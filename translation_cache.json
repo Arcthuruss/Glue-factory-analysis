@@ -1,0 +1,19 @@
+{
+    "ダート": "Dirt",
+    "芝": "Turf",
+    "右": "Right",
+    "左": "Left",
+    "晴": "Clear Sky",
+    "曇": "Cloudy",
+    "雨": "Rain",
+    "小雨": "Light Rain",
+    "小雪": "Light Snow",
+    "雪": "Snow",
+    "晴 ": "Clear",
+    "曇 ": "Cloudy",
+    "小雨 ": "Light Rain",
+    "良": "Good",
+    "稍重": "Slightly Heavy",
+    "不良": "Bad",
+    "重": "Heavy"
+}
