@@ -6,14 +6,14 @@ import pandas as pd
 # Fonction pour charger le cache
 def load_cache(cache_file):
     try:
-        with open(cache_file, 'r', encoding='utf-8') as f:
+        with open(cache_file, 'r', encoding='utf-8', newline='') as f:
             return json.load(f)
     except FileNotFoundError:
         return {}
 
 # Fonction pour sauvegarder le cache
 def save_cache(cache, cache_file):
-    with open(cache_file, 'w', encoding='utf-8') as f:
+    with open(cache_file, 'w', encoding='utf-8', newline='\n') as f:
         json.dump(cache, f, ensure_ascii=False, indent=4)
 
 # Si la valeur n'est pas dans le cache, demande la traduction
@@ -23,7 +23,8 @@ def ask_translation(text):
 
 def annotate_csv(input_file, output_file, cache_file='translation_cache.json'):
     cache = load_cache(cache_file)
-    df = pd.read_csv(input_file)
+    with open(input_file, 'r', encoding='utf-8', newline='') as fh:
+        df = pd.read_csv(fh)
 
     # Ne traiter que les 5 premières colonnes
     cols_to_check = df.columns[:5]
@@ -48,7 +49,9 @@ input_file = "./clean_datasets/filtered_race_result.csv"
 output_file = "./clean_datasets/translated_race_result.csv"
 annotate_csv(input_file, output_file)
 cache = load_cache('translation_cache.json')
-df = pd.read_csv(input_file)
+with open(input_file, 'r', encoding='utf-8', newline='') as fh:
+    df = pd.read_csv(fh)
 df = replace_with_cache(df, cache)
-df.to_csv(output_file, index=False)
+with open(output_file, 'w', encoding='utf-8', newline='') as fh:
+    df.to_csv(fh, index=False, lineterminator='\n')
 
